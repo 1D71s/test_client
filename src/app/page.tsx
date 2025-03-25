@@ -1,7 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [data, setData] = useState<{ message?: string } | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.API_LINK}`);
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -18,6 +36,13 @@ export default function Home() {
             Get started by editing <code>src/app/page.tsx</code>.
           </li>
           <li>Save and see your changes instantly.</li>
+          <li>
+            {data ? (
+              <p>{data.message ? data.message : "No message available"}</p>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </li>
         </ol>
 
         <div className={styles.ctas}>
