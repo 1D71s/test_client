@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.API_LINK}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_LINK}`);
         const result = await response.json();
         setData(result);
       } catch (error) {
