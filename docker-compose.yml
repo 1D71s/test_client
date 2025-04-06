@@ -6,7 +6,4 @@ services:
       - "7000:7000"
     environment:
       - NODE_ENV=production
-    volumes:
-    - .:/app
-    - /app/node_modules
     command: npm run start
